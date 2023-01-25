@@ -35,18 +35,9 @@ export default function Home() {
       max_tokens: 500,
       temperature: 0.5,
     };
-    let response = await axios.post(
-      "https://api.openai.com/v1/engines/text-davinci-003/completions",
-      request,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_AI_TOKEN}`,
-        },
-      }
-    );
-    console.log(response);
+    let response = await axios.post("api/recipe", request);
     if (response && response.status === 200) {
-      setResult(response.data.choices);
+      setResult(response.data);
     }
     setLoading(false);
   };
